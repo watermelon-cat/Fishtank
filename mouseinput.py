@@ -67,7 +67,7 @@ while running:# Game loop#######################################################
                 fishes.append(Fish())
             elif mousePos[0] >50 and mousePos[0] < 100 and mousePos[1] >500:
                 print("REMOVEEOEOOEOEOEO")
-                fishes.remove(-1)
+                fishes.pop(-1)
                 
         if event.type == pygame.MOUSEMOTION:
             mousePos = event.pos       

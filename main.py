@@ -80,8 +80,8 @@ class Fish:
             
 class jellyfish:
     def __init__ (self):
-        self.xpos = random.randint(0, 750)
-        self.ypos = random.randint(0, 550)
+        self.xpos = random.randint(0, 950)
+        self.ypos = random.randint(0, 640)
         self.xv = 1
         self.yv = 1
         self.last_boost_time = time.time()
@@ -98,9 +98,9 @@ class jellyfish:
             
 
         
-        if self.xpos <= 0 or self.xpos >= 800:
+        if self.xpos <= 0 or self.xpos >= 950:
             self.xv *= -1
-        if self.ypos >= 550:
+        if self.ypos >= 640:
             self.yv = -100
               
             
@@ -235,8 +235,8 @@ while running:# Game loop#######################################################
     
     pygame.draw.rect(screen, (192,192,192), (0, 700, 50, 100))
     pygame.draw.rect(screen, (255,0,0), (50, 700, 50, 100))
-    pygame.draw.rect(screen, (255,0,0), (100, 500, 50, 100))
-    pygame.draw.rect(screen, (200,0,0), (150, 500, 50, 100))
+    pygame.draw.rect(screen, (255,0,0), (100, 700, 50, 100))
+    pygame.draw.rect(screen, (200,0,0), (150, 700, 50, 100))
     pygame.draw.rect(screen, (201, 199, 189), (0, 700, 1000, 100))
     
     screen.blit(spongebobhouse, (650, 370))

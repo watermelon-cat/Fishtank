@@ -45,6 +45,37 @@ class Fish:
     def draw(self, screen):
         screen.blit(self.fishImage, (self.xpos, self.ypos))
 
+class jellyfish:
+    def __init__ (self):
+        self.xpos = random.randint(0, 750)
+        self.ypos = random.randint(0, 550)
+        self.xv = 1
+        self.yv = 1
+        self.last_boost_time = time.time()
+    def move (self):
+        self.xpos += self.xv
+        self.ypos += self.yv
+
+        if time.time() - self.last_boost_time > 5:
+            self.yv = -5
+            self.last_boost_time = time.time()
+        if self.ypos < 20:
+            self.yv = 1
+
+            
+
+        
+        if self.xpos <= 0 or self.xpos >= 800:
+            self.xv *= -1
+        if self.ypos >= 550:
+            self.yv = -100
+              
+            
+    def draw(self):
+        pygame.draw.rect(screen,(255,0,250), (self.xpos, self.ypos, 25 ,25))
+
+jelly = []
+
 
 
 # instantiate a fish object
@@ -65,9 +96,13 @@ while running:# Game loop#######################################################
                 numClicks += 1
                 print(numClicks)
                 fishes.append(Fish())
-            elif mousePos[0] >50 and mousePos[0] < 100 and mousePos[1] >500:
+            elif mousePos[0] > 0 and mousePos[0] < 100 and mousePos[1] >500:
+                jelly.append(jellyfish())
+            elif mousePos[0] >50 and mousePos[0] < 150 and mousePos[1] >500:
                 print("REMOVEEOEOOEOEOEO")
                 fishes.pop(-1)
+            elif mousePos[0] >50 and mousePos[0] < 200 and mousePos[1] >500:
+                jelly.pop(-1)
                 
         if event.type == pygame.MOUSEMOTION:
             mousePos = event.pos       
@@ -76,17 +111,22 @@ while running:# Game loop#######################################################
     #physics/update section--------------------------
     for i in range(len(fishes)):
         fishes[i].move()
-
+    for j in range(len(jelly)):
+        jelly[j].move()
 
     #render section----------------------------------
     # Fill the screen with a background color
     screen.fill((0, 150, 255))
     pygame.draw.rect(screen, (192,192,192), (0, 500, 50, 100))
-    pygame.draw.rect(screen, (255,0,0), (50, 500, 50, 100))
+    pygame.draw.rect(screen, (255,0,200), (50, 500, 50, 100))
+    pygame.draw.rect(screen, (255,0,0), (100, 500, 50, 100))
+    pygame.draw.rect(screen, (200,0,0), (150, 500, 50, 100))
 
     # Draw the fish
     for i in range(len(fishes)):
         fishes[i].draw(screen)
+    for j in range(len(jelly)):
+        jelly[j].draw()
 
     # Update the display
     pygame.display.flip()
@@ -94,4 +134,3 @@ while running:# Game loop#######################################################
     #end of game loop!#######################################################
 
 pygame.quit()
-

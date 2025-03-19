@@ -77,6 +77,38 @@ class Fish:
             screen.blit(self.fishImage, (self.xpos, self.ypos))
         else:
             screen.blit(self.fishImageleft, (self.xpos, self.ypos))
+            
+class jellyfish:
+    def __init__ (self):
+        self.xpos = random.randint(0, 750)
+        self.ypos = random.randint(0, 550)
+        self.xv = 1
+        self.yv = 1
+        self.last_boost_time = time.time()
+    def move (self):
+        self.xpos += self.xv
+        self.ypos += self.yv
+
+        if time.time() - self.last_boost_time > 5:
+            self.yv = -5
+            self.last_boost_time = time.time()
+        if self.ypos < 20:
+            self.yv = 1
+
+            
+
+        
+        if self.xpos <= 0 or self.xpos >= 800:
+            self.xv *= -1
+        if self.ypos >= 550:
+            self.yv = -100
+              
+            
+    def draw(self):
+        pygame.draw.rect(screen,(255,0,250), (self.xpos, self.ypos, 25 ,25))
+
+jelly = []
+
 
 class Fishfood:
     def __init__(self):
@@ -127,6 +159,10 @@ while running:# Game loop#######################################################
             elif mousePos[0] >50 and mousePos[0] < 100 and mousePos[1] >700 and len(fishes) >= 1:
                 print("REMOVEEOEOOEOEOEO")
                 fishes.pop(-1)
+            elif mousePos[0] > 100 and mousePos[0] < 150 and mousePos[1] >700:
+                jelly.append(jellyfish())
+            elif mousePos[0] >150 and mousePos[0] < 200 and mousePos[1] >700 and len(jelly) >= 1:
+                jelly.pop(-1)
             
             if mousePos[0] > 0 and mousePos[0] < 1000 and mousePos[1] <700:
                 for i in range (len(food)):#find the first llive missile to move
@@ -181,6 +217,8 @@ while running:# Game loop#######################################################
     #physics/update section--------------------------
     for i in range(len(fishes)):
         fishes[i].move()
+    for j in range(len(jelly)):
+        jelly[j].move()
     
     for i in range(len(food)):
         food[i].move()
@@ -194,9 +232,12 @@ while running:# Game loop#######################################################
     for i in range(25000):
         pygame.draw.circle(screen, colors1[i], (positions1[i][0], positions1[i][1]), sizes1[i])
         
-    pygame.draw.rect(screen, (201, 199, 189), (0, 700, 1000, 100))
+    
     pygame.draw.rect(screen, (192,192,192), (0, 700, 50, 100))
     pygame.draw.rect(screen, (255,0,0), (50, 700, 50, 100))
+    pygame.draw.rect(screen, (255,0,0), (100, 500, 50, 100))
+    pygame.draw.rect(screen, (200,0,0), (150, 500, 50, 100))
+    pygame.draw.rect(screen, (201, 199, 189), (0, 700, 1000, 100))
     
     screen.blit(spongebobhouse, (650, 370))
     screen.blit(patrickhouse, (60, 500))
@@ -205,6 +246,9 @@ while running:# Game loop#######################################################
     # Draw the fish
     for i in range(len(fishes)):
         fishes[i].draw(screen)
+
+    for j in range(len(jelly)):
+        jelly[j].draw()
    
     for i in range (len(food)):
         food[i].draw()

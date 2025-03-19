@@ -232,12 +232,11 @@ while running:# Game loop#######################################################
     for i in range(25000):
         pygame.draw.circle(screen, colors1[i], (positions1[i][0], positions1[i][1]), sizes1[i])
         
-    
-    pygame.draw.rect(screen, (192,192,192), (0, 700, 50, 100))
-    pygame.draw.rect(screen, (255,0,0), (50, 700, 50, 100))
-    pygame.draw.rect(screen, (255,0,0), (100, 700, 50, 100))
-    pygame.draw.rect(screen, (200,0,0), (150, 700, 50, 100))
-    pygame.draw.rect(screen, (201, 199, 189), (0, 700, 1000, 100))
+    pygame.draw.rect(screen, (201, 199, 189), (0, 700, 1000, 100)) #interface
+    pygame.draw.rect(screen, (114, 114, 115), (0, 700, 50, 100)) #silver add
+    pygame.draw.rect(screen, (217, 68, 65), (50, 700, 50, 100)) #silver remove
+    pygame.draw.rect(screen, (230, 108, 230), (100, 700, 50, 100)) #jelly add
+    pygame.draw.rect(screen, (217, 68, 65), (150, 700, 50, 100)) #jelly remove
     
     screen.blit(spongebobhouse, (650, 370))
     screen.blit(patrickhouse, (60, 500))
